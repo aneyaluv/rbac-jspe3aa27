@@ -8,8 +8,8 @@
         <div>
             <form action="{{ route('admin.manageUsers') }}" method="POST">
                 @csrf
-                <table>
-                    <thead>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-dark">
                         <tr>
                             <th>User ID</th>
                             <th>Username</th>
@@ -25,7 +25,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                <select name="role_id">
+                                <select name="role_id[{{ $user->id }}]" class="form-select">
                                     <option value="">Select Role</option>
                                     @foreach ($roles as $role)
                                     <option value="{{ $role->id }}" @if($user->hasRole($role->name)) selected @endif>
@@ -35,7 +35,7 @@
                                 </select>
                             </td>
                             <td>
-                                <button type="submit" name="user_id" value="{{ $user->id }}">Save</button>
+                                <button type="submit" name="user_id" value="{{ $user->id }}" class="btn btn-primary">Save</button>
                             </td>
                         </tr>
                         @endforeach
@@ -44,7 +44,7 @@
             </form>
         </div>
         <div class="col">
-            <a href="{{ route('dash') }}" class="link-dark">Back</a>
+            <a href="{{ route('dash') }}" class="btn btn-danger">Back</a>
         </div>
     </div>
 </div>
